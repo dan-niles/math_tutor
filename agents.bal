@@ -1,4 +1,16 @@
 import ballerina/ai;
+import ballerina/log;
+
+# Retrieves relevant chunk for the given query.
+# + query - The text query to search for
+# + return - Type of the variable
+@ai:AgentTool
+@display {label: "", iconPath: "https://bcentral-packageicons.azureedge.net/images/ballerina_ai_1.15.0.png"}
+isolated function retrieveTool(string query) returns ai:QueryMatch[]|error {
+    log:printInfo("test");
+    ai:QueryMatch[] aiQuerymatch = check aiVectorknowledgebase.retrieve(query);
+    return aiQuerymatch;
+}
 
 final ai:Agent mathTutorAgent = check new (
     systemPrompt = {
@@ -13,7 +25,7 @@ RULES (MUST FOLLOW):
 * If you do not call a tool when a calculation is required, the response is invalid.
 
 Provide clear, step-by-step explanations. Include the final answer at the end.`
-    }, memory = aiShorttermmemory, model = mathTutorModel, tools = [sumTool, subtractTool, multiplyTool, divideTool], verbose = false
+    }, memory = aiShorttermmemory, model = mathTutorModel, tools = [sumTool, subtractTool, multiplyTool, divideTool, retrieveTool], verbose = false
 );
 
 # Calculates the sum of two numbers
