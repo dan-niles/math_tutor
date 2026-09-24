@@ -1,13 +1,13 @@
 import ballerina/ai;
-import ballerina/log;
 
-# Retrieves relevant chunk for the given query.
+# Searches the course knowledge base (grading policy, order of operations, quadratic formula
+# reference material) for content relevant to the given query. Use this for any question about
+# course policies, grading rules, penalties, or reference material that is not a direct calculation.
 # + query - The text query to search for
-# + return - Type of the variable
+# + return - The matching knowledge base chunks ranked by relevance
 @ai:AgentTool
 @display {label: "", iconPath: "https://bcentral-packageicons.azureedge.net/images/ballerina_ai_1.15.0.png"}
 isolated function retrieveTool(string query) returns ai:QueryMatch[]|error {
-    log:printInfo("test");
     ai:QueryMatch[] aiQuerymatch = check aiVectorknowledgebase.retrieve(query);
     return aiQuerymatch;
 }
@@ -23,6 +23,8 @@ RULES (MUST FOLLOW):
 * You are NOT allowed to compute results mentally or inline.
 * If a calculation is required and a tool is available, you MUST call the tool.
 * If you do not call a tool when a calculation is required, the response is invalid.
+* For questions about course policies, grading, penalties, or other reference material (for example, late problem set penalties or the order of operations), you MUST call the retrieveTool with the user's question to search the knowledge base before answering.
+* Base your answer only on the content returned by retrieveTool for such questions. If retrieveTool returns no relevant information, say that you could not find that information instead of guessing.
 
 Provide clear, step-by-step explanations. Include the final answer at the end.`
     }, memory = aiShorttermmemory, model = mathTutorModel, tools = [sumTool, subtractTool, multiplyTool, divideTool, retrieveTool], verbose = false
@@ -51,7 +53,6 @@ isolated function subtractTool(float num1, float num2) returns float {
 }
 
 # Calculates the product of two numbers
-#
 # + num1 - The first number
 # + num2 - The second number
 # + return - The product of num1 and num2
