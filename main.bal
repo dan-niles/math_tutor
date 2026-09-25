@@ -9,4 +9,13 @@ service /MathTutor on MathTutorListener {
 
         return {message: stringResult};
     }
+
+    # Starts a durable run of the math tutor agent and waits for its result. The run survives
+    # a service restart or crash: calling waitForResult again with the same instance ID resumes
+    # the wait instead of losing progress.
+    resource function post durableChat(@http:Payload ai:ChatReqMessage request) returns ai:ChatRespMessage|error {
+        string instanceId = check durableMathTutorAgent.run(request.message);
+        anydata result = check durableMathTutorAgent.waitForResult(instanceId);
+        return {message: result.toString()};
+    }
 }
