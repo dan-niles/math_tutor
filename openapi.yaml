@@ -21,22 +21,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ChatRespMessage"
-  /durableChat:
-    post:
-      operationId: postDurableChat
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/ChatReqMessage"
-      responses:
-        "201":
-          description: Durable agent reply
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ChatRespMessage"
 components:
   schemas:
     ChatReqMessage:
