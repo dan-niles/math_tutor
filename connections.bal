@@ -1,3 +1,4 @@
-import ballerinax/ai.anthropic;
+import ballerinax/ai.openai;
 
-final anthropic:ModelProvider mathTutorModel = check new (anthropicApiKey, anthropic:CLAUDE_HAIKU_4_5);
+final openai:ModelProvider mathTutorModel = check new (openRouterApiKey, openai:GPT_4O_MINI,
+    serviceUrl = "https://openrouter.ai/api/v1");

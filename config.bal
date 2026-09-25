@@ -1,3 +1,3 @@
 configurable string config = "";
 
-configurable string anthropicApiKey = ?;
+configurable string openRouterApiKey = ?;
