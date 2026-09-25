@@ -1,3 +1,3 @@
-import ballerina/ai;
+import ballerinax/ai.anthropic;
 
-final ai:Wso2ModelProvider mathTutorModel = check ai:getDefaultModelProvider();
+final anthropic:ModelProvider mathTutorModel = check new (anthropicApiKey, anthropic:CLAUDE_HAIKU_4_5);
