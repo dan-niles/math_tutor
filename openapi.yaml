@@ -1,0 +1,38 @@
+openapi: 3.0.1
+info:
+  title: MathTutor
+  version: 1.0.0
+paths:
+  /chat:
+    post:
+      operationId: chat
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ChatRequest"
+      responses:
+        "200":
+          description: Agent reply
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ChatResponse"
+components:
+  schemas:
+    ChatRequest:
+      type: object
+      required:
+        - sessionId
+        - message
+      properties:
+        sessionId:
+          type: string
+        message:
+          type: string
+    ChatResponse:
+      type: object
+      properties:
+        message:
+          type: string
