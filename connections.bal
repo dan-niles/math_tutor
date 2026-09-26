@@ -1,3 +1,4 @@
-import ballerina/ai;
+import ballerinax/ai.openai;
 
-final ai:Wso2ModelProvider mathTutorModel = check ai:getDefaultModelProvider();
+final openai:ModelProvider mathTutorModel = check new (openRouterApiKey, openai:GPT_4O_MINI,
+    serviceUrl = "https://openrouter.ai/api/v1");
