@@ -10,3 +10,6 @@ generated/
 # See https://ballerina.io/learn/provide-values-to-configurable-variables/ for more details.
 Config.toml
 tests/evaluation-reports/
+
+# File used to enable development-time tracing.
+trace_enabled.bal
