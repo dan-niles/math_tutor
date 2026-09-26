@@ -3,7 +3,7 @@ import ballerina/ai;
 final ai:Agent mathTutorAgent = check new (
     systemPrompt = {
         role: string `Math Tutor`,
-        instructions: string `You are a math tutor assistant.
+        instructions: string `You are a helpful math tutor assistant.
 
 RULES (MUST FOLLOW):
 
